@@ -14,6 +14,7 @@ public class OthelloAI56 implements OthelloAI{
 	
 	//The search algorithm. My evaluation is basically an int measuring the amount of corners a state has, 
 	//the number of pucks, the number of edges, 
+	
     public int search(OthelloGameState state, int depth, int max, int min){
  
 		int evaluation = 0;
@@ -21,8 +22,7 @@ public class OthelloAI56 implements OthelloAI{
 		int cornerScore = 0;
 		int edgeScore = 0;
 		int badCorner = 0;
-	//	int max = -999999;
-	//	int min = 999999;
+
 		
 		//My evaluation logic. In essence, corners are worth top notch, then edges, then number of pucks gained.
 		//Equivalent points are subtracted if in this current state the opponent has a corner, an edge, or a higher
@@ -161,7 +161,6 @@ public class OthelloAI56 implements OthelloAI{
 				}
 				
 				evaluation = puckScore + cornerScore + edgeScore + badCorner;
-//				System.out.println("WHITE EVAL " + evaluation);
 				return evaluation;
 			}
 		}
@@ -174,20 +173,15 @@ public class OthelloAI56 implements OthelloAI{
 						for(int j = 0; j < 8; j++){
 							if(state.isValidMove(i, j)){
 								OthelloGameState tempState = state.clone();
-//								System.out.println("AI tries to move to " + i + " " + j );
 								tempState.makeMove(i, j);
-//								System.out.println("AI moved to " + i + " " + j);
-//								System.out.println("depth is : " + depth);
 								int nextEval = search(tempState, depth - 1, max, min);
 								
 								if(nextEval > max){
-//									System.out.println("Max changed to " + nextEval);
 									max = nextEval;
 								}
 								
 								//Prune
 								if(max >= min){
-//									System.out.println("Prune?");
 									return max;
 								}
 							}
@@ -203,18 +197,13 @@ public class OthelloAI56 implements OthelloAI{
 						for(int j = 0; j < 8; j++){
 							if(state.isValidMove(i, j)){
 								OthelloGameState tempState = state.clone();
-//								System.out.println("AI tries to move to " + i + " " + j );
 								tempState.makeMove(i, j);
-//								System.out.println("AI moved to " + i + " " + j);
-//								System.out.println("depth is : " + depth);
 								int nextEval = search(tempState, depth - 1, max, min);
 								if(nextEval > max){
-//									System.out.println("Max changed");
 									max = nextEval;
 								}
 								//Prune
 								if(max >= min){
-//									System.out.println("Prune?");
 									return max;
 								}
 							}
@@ -229,18 +218,13 @@ public class OthelloAI56 implements OthelloAI{
 						for(int j = 0; j < 8; j++){
 							if(state.isValidMove(i, j)){
 								OthelloGameState tempState = state.clone();
-//								System.out.println("Enemy tries to move to " + i + " " + j );
 								tempState.makeMove(i, j);
-//								System.out.println("Enemy moved to " + i + " " + j);
-//								System.out.println("depth is : " + depth);
 								int nextEval = search(tempState, depth - 1, max, min);
 								if(nextEval < min){
-//									System.out.println("Min changed");
 									min = nextEval;
 								}
 								//Prune
 								if(min <= max){
-//									System.out.println("Prune?");
 									return min;
 								}
 							}
@@ -303,13 +287,9 @@ public class OthelloAI56 implements OthelloAI{
 			for(int j = 0; j < 8; j++){
 				if(state.isValidMove(i, j)){
 					OthelloGameState temp = state.clone();
-//					System.out.println("THE OUTSIDE");
-//					System.out.println("AI tries to move to " + i + " " + j );
 					temp.makeMove(i, j);
-//					System.out.println("AI moved to "+ i + " " + j);
 					int eval = search(temp, depth, max, min);
 					if(eval > maxE){
-//						System.out.println("We now choose best row and column " + i + " " + j);
 						maxE = eval;
 						bestR = i;
 						bestC = j;
@@ -318,7 +298,6 @@ public class OthelloAI56 implements OthelloAI{
 			}	
 		}
 		
-//		System.out.println(bestR + " **************************THE BEST*************** " + bestC);
 		System.out.println(turn);
 		return new OthelloMove(bestR, bestC);
 	}
