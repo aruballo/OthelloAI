@@ -95,7 +95,6 @@ public class OthelloAI56 implements OthelloAI{
 				
 				
 				evaluation = puckScore + cornerScore + edgeScore + badCorner;
-//				System.out.println("BLACK EVAL " + evaluation);
 				return evaluation;
 				
 			}
@@ -243,6 +242,7 @@ public class OthelloAI56 implements OthelloAI{
 		
 		//Up the turn counter, since it is our turn.
 		turn++;
+		
 		//In order to check which color this AI is, we grab the scores first.
 		int blackScore = state.getBlackScore();  
 		int whiteScore = state.getWhiteScore();
@@ -278,6 +278,7 @@ public class OthelloAI56 implements OthelloAI{
 		int maxE = -999999;
 	
 		//Max and min numbers (alpha and beta)
+		//This is for implementing alpha beta pruning
 		int max = -99999999;
 		int min = 99999999;
 		
@@ -298,7 +299,7 @@ public class OthelloAI56 implements OthelloAI{
 			}	
 		}
 		
-		System.out.println(turn);
+
 		return new OthelloMove(bestR, bestC);
 	}
 
